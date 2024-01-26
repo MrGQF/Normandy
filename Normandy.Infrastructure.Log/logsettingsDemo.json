@@ -1,0 +1,65 @@
+﻿{
+  "ExcludeLogFilter": {
+    "Switch": true,
+    "SourceContextPre": [ "System" ]
+  },
+
+  "Serilog": {
+    "Using": [ "Serilog.Sinks.File", "Serilog.Sinks.Async", "Serilog.Sinks.Console", "Serilog.Enrichers.CorrelationId", "Serilog.Enrichers.ClientInfo", "Serilog.Expressions" ],
+    "MinimumLevel": {
+      "ControlledBy": "$mySwitch",
+      "Override": {
+        "Microsoft": "Debug"
+      }
+    },
+    "LevelSwitches": {
+      "$mySwitch": "Information",
+      "$consoleSwitch": "Information"
+
+    },
+    "WriteTo": [
+      {
+        "Name": "Async",
+        "Args": {
+          "configure": [
+            {
+              "Name": "Console",
+              "Args": {
+                "outputTemplate": "{Timestamp:HH:mm:ss.fff zzz} [{Level}] {SourceContext} {CorrelationId} {ClientIp} {Message}  {NewLine}{Exception}",
+                "levelSwitch": "$consoleSwitch"
+              }
+
+            },
+            {
+              "Name": "File",
+              "Args": {
+                "path": "./logs/log.json",
+                "rollingInterval": "Day",
+                "formatter": "Serilog.Formatting.Json.JsonFormatter",
+                "levelSwitch": "$mySwitch"
+              }
+            }
+          ]
+        }
+      }
+    ],
+    "Filter": [
+      {
+        "Name": "ByExcluding",
+        "Args": {
+          "expression": "SourceContext like 'Microsoft%' and SourceContext not like '%Diagnostics' and SourceContext not like '%Lifetime'"
+        }
+      },
+      {
+        "Name": "ByExcluding",
+        "Args": {
+          "expression": "SourceContext like 'System%'"
+        }
+      }
+    ],
+    "Enrich": [ "WithCorrelationIdHeader", "WithClientIp", "FromLogContext" ],
+    "Properties": {
+      "Application": "Normandy.Identity.Server"
+    }
+  }
+}

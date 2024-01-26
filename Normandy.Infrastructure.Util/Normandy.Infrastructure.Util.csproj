@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+		<Version>$(VersionPrefix)2.0.1</Version>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Mvc.Formatters.Json" Version="2.2.0" />
+		<PackageReference Include="RSAExtensions" Version="1.0.3" />
+		<PackageReference Include="System.IO" Version="4.3.0" PrivateAssets="all" />
+	</ItemGroup>
+
+</Project>
+

@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Normandy.Identity.UserData.Domain\Normandy.Identity.UserData.Domain.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.EntityFramework\Normandy.Infrastructure.EntityFramework.csproj" />
+  </ItemGroup>
+
+</Project>

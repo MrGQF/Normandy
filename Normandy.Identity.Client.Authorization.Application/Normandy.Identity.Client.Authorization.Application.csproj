@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
+  </ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+		<PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="6.0.0" />
+	</ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Normandy.Identity.Client.Authorization.Application.Contracts\Normandy.Identity.Client.Authorization.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Normandy.Identity.Client.Domain.Shared\Normandy.Identity.Client.Domain.Shared.csproj" />
+    <ProjectReference Include="..\Normandy.Identity.Client.Domain\Normandy.Identity.Client.Domain.csproj" />
+    <ProjectReference Include="..\Normandy.Legacy.Client\Normandy.Legacy.Client.csproj" />
+  </ItemGroup>
+
+</Project>

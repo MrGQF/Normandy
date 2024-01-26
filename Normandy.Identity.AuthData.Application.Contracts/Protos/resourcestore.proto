@@ -1,0 +1,132 @@
+﻿syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Normandy.Identity.AuthDataRpc";
+
+package resourcestorerpc;
+
+service ResourceStoreRpc {
+	rpc FindIdentityResourcesByScopeNameAsync (IdentityResourceRequest) returns (IdentityResourceResult) {
+		option (google.api.http) = {
+			get: "/v1/resourcestore/identityresource/{scopeNames}"
+	  };
+	};
+
+	rpc FindApiScopesByNameAsync (ApiScopeRequest) returns (ApiScopeResult) {
+		option (google.api.http) = {
+			get: "/v1/resourcestore/apiscope/{scopeNames}"
+	  };
+	};
+
+	rpc FindApiResourcesAsync (ApiResourceRequest) returns (ApiResourceResult) {
+		option (google.api.http) = {
+			get: "/v1/resourcestore/apiresource/scopeNames/{scopeNames}/apiResourceNames/{apiResourceNames}"
+	  };
+	};
+
+	rpc GetAllResourcesAsync (ResourcesRequest) returns (ResourcesResult) {
+		option (google.api.http) = {
+			get: "/v1/resourcestore/resources"
+	  };
+	};
+}
+
+message IdentityResourceRequest {
+	repeated google.protobuf.StringValue scopeNames = 1;
+}
+
+message IdentityResourceResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	repeated IdentityResource Data = 3;
+}
+
+message  IdentityResource {
+	bool Required = 1;
+	bool Emphasize = 2;
+
+	bool Enabled = 3;
+	google.protobuf.StringValue Name = 4;
+	google.protobuf.StringValue DisplayName = 5;
+	google.protobuf.StringValue Description = 6;
+	bool ShowInDiscoveryDocument = 7;
+	repeated google.protobuf.StringValue UserClaims = 8;
+	map<string, string> Properties = 9;
+}
+
+message ApiScopeRequest {
+	repeated google.protobuf.StringValue scopeNames = 1;
+}
+
+message ApiScopeResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	repeated ApiScope Data = 3;
+}
+
+message ApiScope {
+	bool Required = 1;
+	bool Emphasize = 2;
+
+	bool Enabled = 3;
+	google.protobuf.StringValue Name = 4;
+	google.protobuf.StringValue DisplayName = 5;
+	google.protobuf.StringValue Description = 6;
+	bool ShowInDiscoveryDocument = 7;
+	repeated google.protobuf.StringValue UserClaims = 8;
+	map<string, string> Properties = 9;
+}
+
+message ApiResourceRequest {
+	repeated google.protobuf.StringValue scopeNames = 1;
+	repeated google.protobuf.StringValue apiResourceNames = 2;
+}
+
+message ApiResourceResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	repeated ApiResource Data = 3;
+}
+
+message ApiResource {
+	bool RequireResourceIndicator = 1;
+	repeated google.protobuf.StringValue Scopes = 2;
+
+	bool Enabled = 3;
+	google.protobuf.StringValue Name = 4;
+	google.protobuf.StringValue DisplayName = 5;
+	google.protobuf.StringValue Description = 6;
+	bool ShowInDiscoveryDocument = 7;
+	repeated google.protobuf.StringValue UserClaims = 8;
+	map<string, string> Properties = 9;
+
+	repeated google.protobuf.StringValue AllowedAccessTokenSigningAlgorithms = 10;
+    repeated Secret ApiSecrets = 11;
+}
+
+message Secret {
+	google.protobuf.StringValue Description = 1;
+	google.protobuf.StringValue Value = 2;
+	google.protobuf.Timestamp Expiration = 3; 
+	google.protobuf.StringValue Type = 4;
+}
+
+message ResourcesRequest {
+}
+
+message ResourcesResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	repeated Resources Data = 3;
+}
+
+message Resources {
+	bool OfflineAccess = 1;
+	repeated IdentityResource IdentityResources = 2;
+	repeated ApiResource ApiResources = 3;
+	repeated ApiScope ApiScopes = 4;
+}
+

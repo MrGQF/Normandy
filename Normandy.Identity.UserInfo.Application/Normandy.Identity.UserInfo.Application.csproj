@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Normandy.Identity.UserInfo.Application.Contracts\Normandy.Identity.UserInfo.Application.Contracts.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.DI\Normandy.Infrastructure.DI.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.Mapper\Normandy.Infrastructure.Mapper.csproj" />
+  </ItemGroup>
+
+</Project>

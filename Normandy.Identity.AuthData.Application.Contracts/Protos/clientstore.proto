@@ -1,0 +1,92 @@
+﻿syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Normandy.Identity.AuthDataRpc";
+
+package clientstorerpc;
+
+service ClientStoreRpc {
+	rpc FindClientByIdAsync (ClientRequest) returns (Result) {
+		option (google.api.http) = {
+			get: "/v1/clientstore/{id}"
+	  };
+	}
+}
+
+// The request message containing the user's name.
+message ClientRequest {
+	google.protobuf.StringValue id = 1;
+}
+
+message Result {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	ClientInfo Data = 3;
+}
+
+message ClientInfo {
+	bool Enabled = 1; 
+	google.protobuf.StringValue ClientId = 2;
+	google.protobuf.StringValue ProtocolType = 3;	
+	repeated ClientSecret ClientSecrets = 4;
+	bool RequireClientSecret = 5;
+	google.protobuf.StringValue ClientName = 6;
+	google.protobuf.StringValue Description = 7;
+	google.protobuf.StringValue ClientUri = 8;
+	google.protobuf.StringValue LogoUri = 9;
+	bool RequireConsent = 10;
+	bool AllowRememberConsent = 11;
+	repeated google.protobuf.StringValue AllowedGrantTypes = 12;
+	bool RequirePkce = 13;
+	bool AllowPlainTextPkce = 14;
+	bool RequireRequestObject = 15;
+	bool AllowAccessTokensViaBrowser = 16;
+	repeated google.protobuf.StringValue RedirectUris = 17;
+	repeated google.protobuf.StringValue PostLogoutRedirectUris = 18;
+	google.protobuf.StringValue FrontChannelLogoutUri = 19;
+	bool FrontChannelLogoutSessionRequired = 20;
+	google.protobuf.StringValue BackChannelLogoutUri = 21;
+	bool BackChannelLogoutSessionRequired = 22;
+	bool AllowOfflineAccess = 23;
+	repeated string AllowedScopes = 24;
+	bool AlwaysIncludeUserClaimsInIdToken = 25;
+	int32 IdentityTokenLifetime = 26;
+	repeated string AllowedIdentityTokenSigningAlgorithms = 27;
+	int32 AccessTokenLifetime = 28;
+	int32 AuthorizationCodeLifetime = 29;
+	int32 AbsoluteRefreshTokenLifetime = 30;
+	int32 SlidingRefreshTokenLifetime = 31;
+	google.protobuf.Int32Value ConsentLifetime = 32;
+	int32 RefreshTokenUsage = 33;
+	bool UpdateAccessTokenClaimsOnRefresh = 34;
+	int32 RefreshTokenExpiration = 35;
+	int32 AccessTokenType = 36;
+	bool EnableLocalLogin = 37;
+	repeated google.protobuf.StringValue IdentityProviderRestrictions = 38;
+	bool IncludeJwtId = 39;
+	repeated ClientClaim ClientClaim = 40;
+	bool AlwaysSendClientClaims = 41;
+	google.protobuf.StringValue ClientClaimsPrefix = 42;
+	google.protobuf.StringValue PairWiseSubjectSalt = 43;
+	google.protobuf.Int32Value UserSsoLifetime = 44;
+	google.protobuf.StringValue UserCodeType = 45;
+	int32 DeviceCodeLifetime = 46;
+	repeated google.protobuf.StringValue AllowedCorsOrigins = 47;
+	map<string, string> Properties = 48;
+}
+
+message ClientSecret {
+	google.protobuf.StringValue Description = 1;
+	google.protobuf.StringValue Value = 2;
+	google.protobuf.Timestamp Expiration = 3; 
+	google.protobuf.StringValue Type = 4;
+}
+
+message ClientClaim {
+	google.protobuf.StringValue Type = 1;
+	google.protobuf.StringValue Value = 2;
+	google.protobuf.StringValue ValueType = 3;
+}

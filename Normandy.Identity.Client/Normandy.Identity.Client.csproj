@@ -1,0 +1,30 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net5.0;net6.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFramework)' == 'net5.0'">
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+  </ItemGroup>
+	
+	<ItemGroup Condition="'$(TargetFramework)' == 'net6.0'">
+    <PackageReference Include="Microsoft.Extensions.Caching.Abstractions" Version="6.0.0" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Normandy.Identity.Client.Authentication.Application\Normandy.Identity.Client.Authentication.Application.csproj" />
+    <ProjectReference Include="..\Normandy.Identity.Client.Authorization.Application\Normandy.Identity.Client.Authorization.Application.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.Cache\Normandy.Infrastructure.Cache.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.Config\Normandy.Infrastructure.Config.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.HttpClient\Normandy.Infrastructure.HttpClient.csproj" />
+    <ProjectReference Include="..\Normandy.Infrastructure.JobSchedule\Normandy.Infrastructure.JobSchedule.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Properties\PublishProfiles\" />
+  </ItemGroup>
+
+</Project>

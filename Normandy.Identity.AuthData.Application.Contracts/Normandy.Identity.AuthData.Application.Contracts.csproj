@@ -1,0 +1,34 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<Nullable>enable</Nullable>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<Folder Include="Dtos\" />
+		<Folder Include="Interfaces\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Normandy.Identity.Domain.Shared\Normandy.Identity.Domain.Shared.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Google.Api.Gax.Grpc" Version="3.5.0" />
+		<PackageReference Include="Google.Protobuf" Version="3.19.1" />
+		<PackageReference Include="Grpc.Core.Api" Version="2.42.0" />
+		<PackageReference Include="Grpc.Tools" Version="2.42.0">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>		
+	</ItemGroup>
+
+	<ItemGroup>
+		<Protobuf Include="Protos\greet.proto" GrpcServices="Both" />
+		<Protobuf Include="Protos\clientstore.proto" GrpcServices="Both" />
+		<Protobuf Include="Protos\resourcestore.proto" GrpcServices="Both" />
+		<Protobuf Include="Protos\HealthCheck.proto" GrpcServices="Both" />
+	</ItemGroup>
+	
+</Project>

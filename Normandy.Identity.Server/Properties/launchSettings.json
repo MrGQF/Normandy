@@ -1,0 +1,30 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:5000",
+      "sslPort": 5001
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Normandy.Identity.Server": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "ARSENAL_SVC_SECURITYMS_HXREDIS_HXREDIS_TCP_HOST": "127.0.0.1:6379",
+        "ARSENAL_SVC_SECURITYMS_HXREDIS_HXREDIS_TCP_Ip": "127.0.0.1",
+        "ARSENAL_SVC_SECURITYMS_HXREDIS_HXREDIS_TCP_Port": "6379"
+      },
+      "applicationUrl": "http://localhost:5000;https://localhost:5001"
+    }
+  }
+}

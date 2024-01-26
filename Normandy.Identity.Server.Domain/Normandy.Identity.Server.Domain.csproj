@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Normandy.Identity.Domain.Shared\Normandy.Identity.Domain.Shared.csproj" />
+	  <ProjectReference Include="..\Normandy.Infrastructure.DI\Normandy.Infrastructure.DI.csproj" />
+	</ItemGroup>
+	
+</Project>

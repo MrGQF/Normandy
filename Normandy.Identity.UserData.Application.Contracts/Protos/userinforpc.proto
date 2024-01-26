@@ -1,0 +1,99 @@
+﻿syntax = "proto3";
+
+import "google/api/annotations.proto";
+import "google/protobuf/wrappers.proto";
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "Normandy.Identity.UserDataRpc";
+
+package userdatarpc;
+
+service UserDataRpc {
+	rpc GetUserInfo (UserInfoRequest) returns (UserInfoResult) {
+		option (google.api.http) = {
+			get: "/v1/userinfo/GetUserInfo/{account}"
+	  };
+	};
+
+	rpc CheckPassword (PasswordCheckRequest) returns (PasswordCheckResult) {
+		option (google.api.http) = {
+			get: "/v1/userinfo/CheckPassword/Md5Pwd/{Md5Pwd}/Userid/{Userid}/Cip/{Cip}"
+	  };
+	};
+
+	rpc GetSessionid (SessionidRequest) returns (SessionidResult) {
+		option (google.api.http) = {
+			get: "/v1/userinfo/GetSessionid/{Userid}"
+	  };
+	};
+
+	rpc GetPcPassport (PcPassportRequest) returns (PcPassportResult) {
+		option (google.api.http) = {
+			get: "/v1/userinfo/GetPcPassport/{Userid}"
+	  };
+	};
+}
+
+message UserInfoRequest {
+	google.protobuf.StringValue account = 1;
+}
+
+message UserInfoResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	repeated UserInfo Data = 3;
+}
+
+message UserInfo {	
+	google.protobuf.Int64Value ThsId = 1;
+	google.protobuf.Int32Value Userid = 2;
+	google.protobuf.StringValue Name = 3;
+}
+
+message PasswordCheckRequest{
+	google.protobuf.StringValue Md5Pwd = 1;
+	google.protobuf.Int32Value Userid = 2;
+	google.protobuf.StringValue Cip = 3;
+}
+
+message PasswordCheckResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+}
+
+message SessionidRequest{
+	google.protobuf.StringValue Userid = 1;
+}
+
+message SessionidResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	SessionInfo Data = 3;
+}
+
+message SessionInfo {
+	google.protobuf.StringValue SignTime = 1;
+	google.protobuf.StringValue Expires = 2;
+	google.protobuf.StringValue SessionId = 3;
+	google.protobuf.StringValue Sign = 4;
+}
+
+message PcPassportRequest{
+	google.protobuf.StringValue Userid = 1;
+	google.protobuf.StringValue QsId = 2;
+	google.protobuf.StringValue Product = 3;
+	google.protobuf.StringValue Version = 4;
+	google.protobuf.StringValue IMEI = 5;
+	google.protobuf.StringValue SDSN = 6;
+	google.protobuf.StringValue Securities = 7;
+	google.protobuf.StringValue Nohqlist = 8;
+	google.protobuf.StringValue Newwgflag = 9;
+}
+
+message PcPassportResult {
+	int32 Code = 1;
+	google.protobuf.StringValue Message = 2;
+	google.protobuf.StringValue Data = 3;
+
+}
+
